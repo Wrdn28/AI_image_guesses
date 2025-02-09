@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.messagebox as msgbox
 import os
 import Ai
 from PIL import Image, ImageTk, ImageDraw
@@ -19,18 +20,14 @@ canvas = tk.Label(window, image=tkimage)
 canvas.pack()
 
 draw = ImageDraw.Draw(img)
-prediction = tk.StringVar()
-label = tk.Label(window, textvariable=prediction)
-label.pack()
-
 last_point = (0, 0)
+
 def draw_image(event):
     global last_point, tkimage
     current_point = (event.x, event.y)
     draw.line([last_point, current_point], fill=line_color, width=30)
     last_point = current_point
     update_canvas()
-    predict_image()
 
 def start_draw(event):
     global last_point
@@ -43,11 +40,15 @@ def update_canvas():
     canvas.pack()
 
 def predict_image():
-    img_temp = img.convert("L") 
     img_temp = img.resize((28, 28))
-    img_temp = np.array(img_temp).flatten()
+    img_temp = np.array(img_temp)
+
+    if img_temp.ndim == 2:
+        img_temp = np.stack((img_temp,) * 3, axis=-1)
+
+    img_temp = img_temp.flatten()
     output = model.predict([img_temp])
-    
+
     predictions = {
         0: "Ini adalah gambar kotak",
         1: "Ini adalah gambar lingkaran",
@@ -55,9 +56,10 @@ def predict_image():
         3: "Ini adalah gambar garis lurus"
     }
     
-    prediction.set(predictions.get(output[0], "Gambar tidak dikenali"))
+    result = predictions.get(output[0], "Gambar tidak dikenali")
+    msgbox.showinfo("Hasil Prediksi", result)
 
-def reset_canvas(event):
+def reset_canvas():
     global img, draw
     img = Image.new(mode="RGB", size=img_size, color=canvas_color)
     draw = ImageDraw.Draw(img)
@@ -85,8 +87,13 @@ def save_image(event):
 
 window.bind("<B1-Motion>", draw_image)
 window.bind("<ButtonPress-1>", start_draw)
-window.bind("<ButtonPress-3>", reset_canvas)
+# window.bind("<ButtonPress-3>", lambda event: reset_canvas())
 window.bind("<Key>", save_image)
 
+btn_predict = tk.Button(window, text="Prediksi", command=predict_image)
+btn_predict.pack()
+
+btn_reset = tk.Button(window, text="Reset", command=reset_canvas)
+btn_reset.pack()
 
 window.mainloop()
