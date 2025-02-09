@@ -43,6 +43,7 @@ def update_canvas():
     canvas.pack()
 
 def predict_image():
+    img_temp = img.convert("L") 
     img_temp = img.resize((28, 28))
     img_temp = np.array(img_temp).flatten()
     output = model.predict([img_temp])
