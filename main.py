@@ -44,6 +44,10 @@ def predict_image():
     img_temp = img.resize((28, 28))
     img_temp = np.array(img_temp)
 
+    if np.all(img_temp == canvas_color):
+        msgbox.showwarning("Peringatan", "Gambar kosong, coba gambar sesuatu dulu!")
+        return
+
     if img_temp.ndim == 2:
         img_temp = np.stack((img_temp,) * 3, axis=-1)
 
@@ -56,7 +60,7 @@ def predict_image():
         2: "Ini adalah gambar segitiga",
         3: "Ini adalah gambar garis lurus"
     }
-    
+
     result = predictions.get(output[0], "Gambar tidak dikenali")
     msgbox.showinfo("Hasil Prediksi", result)
 
