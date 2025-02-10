@@ -9,26 +9,31 @@ def load_dataset():
     segitiga = []
     garislurus = []
 
-    for file in os.listdir("kotak"):
-        img = Image.open("kotak/" + file) 
+    dir_kotak = "dataset/kotak/"
+    dir_lingkaran = "dataset/lingkaran/"
+    dir_segitiga = "dataset/segitiga/"
+    dir_garislurus = "dataset/garislurus/"
+
+    for file in os.listdir(dir_kotak):
+        img = Image.open(dir_kotak + file) 
         img = np.array(img)
         img = img.flatten()
         kotak.append(img)
 
-    for file in os.listdir("lingkaran"):
-        img = Image.open("lingkaran/" + file) 
+    for file in os.listdir(dir_lingkaran):
+        img = Image.open(dir_lingkaran + file) 
         img = np.array(img)
         img = img.flatten()
         lingkaran.append(img)
 
-    for file in os.listdir("segitiga"):
-        img = Image.open("segitiga/" + file) 
+    for file in os.listdir(dir_segitiga):
+        img = Image.open(dir_segitiga + file) 
         img = np.array(img)
         img = img.flatten()
         segitiga.append(img)
 
-    for file in os.listdir("garislurus"):
-        img = Image.open("garislurus/" + file) 
+    for file in os.listdir(dir_garislurus):
+        img = Image.open(dir_garislurus+ file) 
         img = np.array(img)
         img = img.flatten()
         garislurus.append(img)

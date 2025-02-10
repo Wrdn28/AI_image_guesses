@@ -69,10 +69,10 @@ def save_image(event):
     img_temp = img.resize((28, 28))
 
     folder_map = {
-        "k": "kotak",
-        "l": "lingkaran",
-        "g": "garislurus",
-        "s": "segitiga"
+        "k": "dataset/kotak",
+        "l": "dataset/lingkaran",
+        "g": "dataset/garislurus",
+        "s": "dataset/segitiga"
     }
 
     if event.char in folder_map:
