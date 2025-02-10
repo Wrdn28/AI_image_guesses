@@ -3,37 +3,37 @@ from PIL import Image
 import os
 import numpy as np
 
+dir_k = "dataset/kotak/"
+dir_l = "dataset/lingkaran/"
+dir_s = "dataset/segitiga/"
+dir_g = "dataset/garislurus/"
+
 def load_dataset():
     kotak = []
     lingkaran = []
     segitiga = []
     garislurus = []
 
-    dir_kotak = "dataset/kotak/"
-    dir_lingkaran = "dataset/lingkaran/"
-    dir_segitiga = "dataset/segitiga/"
-    dir_garislurus = "dataset/garislurus/"
-
-    for file in os.listdir(dir_kotak):
-        img = Image.open(dir_kotak + file) 
+    for file in os.listdir(dir_k):
+        img = Image.open(dir_k + file) 
         img = np.array(img)
         img = img.flatten()
         kotak.append(img)
 
-    for file in os.listdir(dir_lingkaran):
-        img = Image.open(dir_lingkaran + file) 
+    for file in os.listdir(dir_l):
+        img = Image.open(dir_l + file) 
         img = np.array(img)
         img = img.flatten()
         lingkaran.append(img)
 
-    for file in os.listdir(dir_segitiga):
-        img = Image.open(dir_segitiga + file) 
+    for file in os.listdir(dir_s):
+        img = Image.open(dir_s + file) 
         img = np.array(img)
         img = img.flatten()
         segitiga.append(img)
 
-    for file in os.listdir(dir_garislurus):
-        img = Image.open(dir_garislurus+ file) 
+    for file in os.listdir(dir_g):
+        img = Image.open(dir_g + file) 
         img = np.array(img)
         img = img.flatten()
         garislurus.append(img)

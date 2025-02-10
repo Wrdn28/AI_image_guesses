@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.messagebox as msgbox
 import os
 import Ai
+from Ai import dir_k, dir_l, dir_s, dir_g
 from PIL import Image, ImageTk, ImageDraw
 import numpy as np
 
@@ -69,10 +70,10 @@ def save_image(event):
     img_temp = img.resize((28, 28))
 
     folder_map = {
-        "k": "dataset/kotak",
-        "l": "dataset/lingkaran",
-        "g": "dataset/garislurus",
-        "s": "dataset/segitiga"
+        "k": dir_k,
+        "l": dir_l,
+        "s": dir_s,
+        "g": dir_g
     }
 
     if event.char in folder_map:
